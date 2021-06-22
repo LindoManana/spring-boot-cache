@@ -140,18 +140,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(apiErrorResponse, HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler(BadRequestException.class)
-	public ResponseEntity<?> badRequestException(ResourceNotFoundException ex, WebRequest request) {
-
-		// print exception
-		this.exceptionLogger(ex);
-
-		// build error response
-		apiErrorResponse = new ApiErrorResponse(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST,
-				ex.getMessage());
-		return buildResponseEntity(apiErrorResponse, HttpStatus.BAD_REQUEST);
-	}
-
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<?> illegalArgumentException(IllegalArgumentException ex) {
 
