@@ -33,7 +33,7 @@ public class BookService {
 
 	@Cacheable(cacheNames = "books", key = "#id", sync = true)
 	public Book findById(Long id) throws ResourceNotFoundException {
-		LOGGER.info("@@ not cached, thus getting data from to db...");
+		LOGGER.info("@@ not cached, thus getting data from db...");
 		Book book = bookRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id :: " + id));
 		return book;
@@ -43,12 +43,12 @@ public class BookService {
 	@CacheEvict(cacheNames = "books", allEntries = true)
 	public Book update(Book book) throws ResourceNotFoundException {
 
-		findById(book.getId());
+		// findById(book.getId());
 
 		return bookRepository.save(book);
 	}
 
-	//@CacheEvict(cacheNames = "books", key = "#id")
+	// @CacheEvict(cacheNames = "books", key = "#id")
 	@CacheEvict(cacheNames = "books", allEntries = true)
 	public String delete(Long id) {
 		Book book = findById(id);
